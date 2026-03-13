@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Customer Review Insight System</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Anime rotating logo -->
+    <div class="anime-logo"></div>
+
+    <!-- Title -->
+    <h1>Customer Review Insight Extraction System</h1>
+
+    <p class="subtitle">
+        Upload your customer reviews CSV file to extract sentiments and insights
+    </p>
+
+    <!-- Upload Section -->
+
+    <div class="upload-box">
+
+        <form id="uploadForm" enctype="multipart/form-data">
+
+            <div class="file-input-wrapper">
+
+                <input type="file" id="fileInput" name="file" accept=".csv" required>
+
+                <label for="fileInput" class="file-label">
+                    <span id="fileName">Drag & Drop or Click to Choose CSV File</span>
+                </label>
+
+            </div>
+
+            <button type="submit" class="btn-submit">
+                🚀 Analyze Reviews
+            </button>
+
+        </form>
+
+        <!-- Loading animation -->
+
+        <div id="loading" class="loading" style="display:none;">
+
+            <div class="spinner"></div>
+
+            <p>🔍 Analyzing your reviews... Hang tight!</p>
+
+        </div>
+
+    </div>
+
+    <!-- CSV Info -->
+
+    <div class="info-box">
+
+        <h3>📋 Example CSV Format</h3>
+
+        <ul>
+            <li><strong>review_text</strong> → customer review text</li>
+            <li><strong>rating</strong> → rating from 1 to 5</li>
+        </ul>
+
+        <p style="margin-top:20px;text-align:center;">
+
+            <button onclick="downloadSample()" class="sample-btn">
+                ⬇ Download Sample CSV
+            </button>
+
+        </p>
+
+    </div>
+
+    <!-- Results -->
+
+    <div id="results" style="display:none;">
+
+        <h2>✨ Analysis Results</h2>
+
+        <div id="resultsContent"></div>
+
+    </div>
+
+    <!-- Footer -->
+
+    <footer class="footer">
+
+        © Made by Team Ankita, Krishnendu, Saikat, Srijeeta & Shamik
+
+    </footer>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/upload.js') }}"></script>
+
+
+<!-- Sakura Animation Script -->
+
+<script>
+
+function createSakura(){
+
+const sakura=document.createElement("div");
+
+sakura.classList.add("sakura");
+
+sakura.innerHTML="🌸";
+
+sakura.style.left=Math.random()*100+"vw";
+
+sakura.style.animationDuration=(5+Math.random()*5)+"s";
+
+document.body.appendChild(sakura);
+
+setTimeout(()=>{sakura.remove()},10000);
+
+}
+
+setInterval(createSakura,500);
+
+</script>
+
+
+<!-- File Name Display Script -->
+
+<script>
+
+const fileInput=document.getElementById("fileInput");
+const fileName=document.getElementById("fileName");
+
+fileInput.addEventListener("change",function(){
+
+if(this.files.length>0){
+
+fileName.textContent=this.files[0].name;
+
+}
+
+});
+
+</script>
+
+</body>
+
+</html>
