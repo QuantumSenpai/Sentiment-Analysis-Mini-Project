@@ -2,12 +2,17 @@ from flask import Flask, render_template, request, jsonify
 import pandas as pd
 import os
 from werkzeug.utils import secure_filename
-
 from models.preprocessor import TextPreprocessor
 from models.sentiment_analyzer import SentimentAnalyzer
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = 'data'
+
+# Create data folder if not exists
+UPLOAD_FOLDER = 'data'
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 preprocessor = TextPreprocessor()
